@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client 2</title>
+</head>
+<body>
+
+<script>
+    const url = "ws://localhost:8080/"
+    const webSocket = new WebSocket(url);
+
+    webSocket.onmessage = (event) => {
+        const forwardMessage = event.data
+        console.log(`Message received: ` + forwardMessage)
+
+        const actionPackage = JSON.parse(forwardMessage)
+        const action = actionPackage.action;
+
+        const actionName = action.name;
+        if (actionName === "request-sign-in") {
+            sendBackwardAction({
+                name: "sign-in",
+                args: {
+                    username: "TypingHare",
+                    password: "123456"
+                }
+            })
+        }
+    }
+
+    function sendMessageToServer(message) {
+        console.log("sent: " + message)
+        webSocket.send(message)
+    }
+
+    function backward(backwardActionPackage) {
+        sendMessageToServer(JSON.stringify(backwardActionPackage))
+    }
+
+    function sendBackwardAction(backwardAction) {
+        backward({
+            id: "Frontend",
+            action: backwardAction
+        })
+    }
+
+    function publish(message) {
+        sendBackwardAction({
+            name: "publish",
+            args: {
+                message: message
+            }
+        })
+    }
+</script>
+</body>
+</html>

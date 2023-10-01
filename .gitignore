@@ -40,3 +40,5 @@ out/
 IDEA.md
 build
 src/main/resources/.env.properties
+
+.DS_Store
