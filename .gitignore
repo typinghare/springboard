@@ -41,4 +41,5 @@ IDEA.md
 build
 src/main/resources/.env.properties
 
+# macOS
 .DS_Store

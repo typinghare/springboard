@@ -18,8 +18,8 @@ public class PrimeNumbers {
     /**
      * Max number.
      */
-//    private final static long MAX_NUMBER = 10_000_000_000L;
-    private final static long MAX_NUMBER = 100L;
+    private final static long MAX_NUMBER = 10_000_000_000L;
+//    private final static long MAX_NUMBER = 1000L;
 
     /**
      * Stores prime numbers.
@@ -62,7 +62,10 @@ public class PrimeNumbers {
      */
     public void run() {
         while (current_number <= MAX_NUMBER) {
-            if (isPrimeNumber(current_number)) appendPrimeNumberToBinaryFile(current_number);
+            if (isPrimeNumber(current_number)) {
+                appendPrimeNumberToBinaryFile(current_number);
+                System.out.println(current_number);
+            }
 
             current_number++;
         }
